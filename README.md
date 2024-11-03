@@ -1,42 +1,26 @@
-Tentang repositori ini
+Simple Load Balancing Python
 ---
-Repositori ini ditujukan untuk packaging pengumpulan tugas pemrograman yang berisi: (1) source code, (2) berkas-berkas dokumentasi, dan (3) berkas-berkas lain pendukung (seperti multimedia, referensi, maupun sumber-sumber referensi).
-
-Pada file `Readme.md` ini *submission* **harus** memiliki bagian/struktur seperti berikut:
-1. Deskripsi repositori
-2. Direktori `codes`
-3. Direktori `documentation`
-4. Informasi anggota kelompok
-
-:warning: **Seluruh** Section di atas bersifat pengantar dan *hendaknya* dihapus ketika melakukan *submission* yang sebenarnya. 
-
-:warning: *Edit* seluruh Section di bawah ini sesuai kebutuhan
-
 # Deskripsi repositori
- > Berisi penjelasan struktur repositori, bersifat seperti daftar isi
+Repositori ini dibuat dengan tujuan memenuhi tugas pada mata kuliah Komunikasi Berbasis Jaringan. Pada repositori ini berisi code dan documentation. Repositori ini membuat sebuah sistem load balancer sederhana dengan python. Berikut flowchart sederhana
 
-*Penjelasan singkat repositori ini, ditujukan untuk matakuliah apa, project-nya akan menyelesaikan masalah apa*
-
- > Lampirkan flowchart sederhana di sini. Flowchart menjelaskan secara garis besar: input-process-output
-
-![flowchart](images/dummy-img.png)
+![flowchart](images/flowchart.png)
+1. client mengirimkan request kepada server dengan queryParameter appID. AppID digunakan sebagai identity proses yang akan dijalankan pada server. Ketika appID long, maka server akan memproses data dalam kurun waktu yang lebih lama dibandingkan dengan appID short. 
+2. Broker akan menerima response dari client dan akan memilah worker mana yang harus di proses permintaan client tersebut. Pemilahan worker menggunakan dua metode yaitu even dan round robin, even akan memilih worker dengan request paling sedikit, sedangkan round robin akan memilih worker secara berurutan.
+3. Worker akan menerima response dari broker, dilakukan parsing parameter untuk memilih proses mana yang akan dijalankan. worker akan memberikan response yang akan dikirimkan ke broker
+4. Broker menerima response dan meneruskan response ke client.
+5. Client menerima response dari hasil pemrosesan data di worker.
 
 ## Direktori `codes`:
-1. `file1.py` - *penjelasan kegunaan file1.py*
-2. `file2.py` - *penjelasan kegunaan file2.py*
-3. ...
+1. `broker.py` - *Menerima response client dan mengarahkan ke worker tertentu*
+2. `worker.py` - *Memproses response client dan memberikan response*
+3. `client.py` - *Melakukan simulasi request client ke server*
 
 ## Direktori `documentation`:
-1. `file1.pdf` - *penjelasan, overview file1.pdf*
-2. `file2.pdf` - *penjelasan, overview file2.pdf*
-3. `file3.jpg` - *penjelasan, overview gambar file3.jpg*
+1. `broker.md` - *penjelasan, overview broker.py*
+2. `worker.md` - *penjelasan, overview worker.py*
+3. `client.md` - *penjelasan, overview client.py*
+4. `simulation.md` - *penjelasan simulasi load balancing*
 
-# Informasi anggota kelompok*
-> Sesuaikan dengan penugasan, jika berkelompok berikan detil anggota kelompok
-
-Nama kelompok: Kelompok 1
-
-**Anggota**
-1. Nama mahasiswa 1 (NIM 1)
-2. Nama mahasiswa 2 (NIM 2)
-3. Nama mahasiswa 3 (NIM 3)
+# Informasi mahasiswa*
+Nama : Rayyan Nur Fauzan
+NIM : 24051905011
